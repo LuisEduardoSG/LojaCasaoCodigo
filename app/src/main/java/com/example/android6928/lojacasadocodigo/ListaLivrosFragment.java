@@ -16,16 +16,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by android6928 on 31/07/17.
  */
 
 public class ListaLivrosFragment extends Fragment {
 
+    @BindView(R.id.list_livros_frag)
+    protected RecyclerView listaLivrosView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, Bundle savedInstanceState){
 
         View view= inflater.inflate(R.layout.fragment_lista_livros,parent,false);
+
+
+        ButterKnife.bind(this,view);
 
         List<Livro> livros = new ArrayList<>();
 
@@ -37,8 +46,8 @@ public class ListaLivrosFragment extends Fragment {
             livros.add(livro);
         }
 
-        //
-        RecyclerView listaLivrosView = (RecyclerView) view.findViewById(R.id.list_livros_frag);
+        //retirado no ex 1.4 pag 17
+        //this.listaLivrosView = (RecyclerView) view.findViewById(R.id.list_livros_frag);
 
         //passa para view, os dados.
         listaLivrosView.setAdapter(new ListaLivrosAdapter(livros));

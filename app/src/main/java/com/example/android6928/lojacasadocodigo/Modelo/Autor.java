@@ -4,9 +4,13 @@ package com.example.android6928.lojacasadocodigo.Modelo;
  * Created by android6928 on 31/07/17.
  */
 public class Autor {
+
     private long id;
+
     private String nome;
+
     private String biografia;
+
     private String urlFoto;
 
     public String getUrlFoto() {
