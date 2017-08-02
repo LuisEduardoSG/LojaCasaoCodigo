@@ -2,12 +2,13 @@ package com.example.android6928.lojacasadocodigo.Modelo;
 
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by android6928 on 31/07/17.
  */
-public class Livro {
+public class Livro implements Serializable{
     private long id;
     private String nome;
     private String descricao;

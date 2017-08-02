@@ -1,4 +1,4 @@
-package com.example.android6928.lojacasadocodigo;
+package com.example.android6928.lojacasadocodigo.Fragment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android6928.lojacasadocodigo.ListaLivrosAdapter;
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
+import com.example.android6928.lojacasadocodigo.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

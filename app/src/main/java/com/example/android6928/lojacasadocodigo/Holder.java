@@ -5,13 +5,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android6928.lojacasadocodigo.Interface.LivrosDelegate;
+import com.example.android6928.lojacasadocodigo.Modelo.Livro;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by android6928 on 31/07/17.
  */
 
+//
 public class Holder extends RecyclerView.ViewHolder {
     @BindView(R.id.item_foto)
     ImageView foto;
@@ -19,7 +24,7 @@ public class Holder extends RecyclerView.ViewHolder {
     @BindView(R.id.item_nome)
     TextView titulo;
 
-    public Holder(View itemView) {
+   public Holder(View itemView) {
         super(itemView);
 
         ButterKnife.bind(this, itemView);
@@ -27,9 +32,12 @@ public class Holder extends RecyclerView.ViewHolder {
         //retirado ex 1.4 pag 17
      /* this.foto = (ImageView) itemView.findViewById(R.id.item_foto);
         this.titulo = (TextView) itemView.findViewById(R.id.item_nome);*/
-
-
     }
 
-
+   /*  @OnClick(R.id.item_livro)
+    public void clickItem(){
+       // Livro livro = livros.get(getAdapterPosition());
+        LivrosDelegate delegate = (LivrosDelegate)  itemView.getContext();
+        //delegate.lidaComLivroSelecionado(livro);
+    }*/
 }
