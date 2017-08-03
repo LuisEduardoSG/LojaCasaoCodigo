@@ -30,6 +30,9 @@ public class ListaLivrosFragment extends Fragment {
     @BindView(R.id.list_livros_frag)
     protected RecyclerView listaLivrosView;
 
+    private List<Livro> livros = new ArrayList<>();
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, Bundle savedInstanceState){
 
@@ -38,15 +41,14 @@ public class ListaLivrosFragment extends Fragment {
 
         ButterKnife.bind(this,view);
 
-        List<Livro> livros = new ArrayList<>();
-
-        //popular a lista de livros
+        //retirado ex 3.3 (acho)
+      /*  //popular a lista de livros
         for (int i = 0; i<=5;i++) {
             Autor autor = new Autor();
             autor.setNome("Autor " + i);
-            Livro livro = new Livro ("Livro " + i,"Descricao " + i, Arrays.asList(autor));
+            Livro livro =    new Livro ("Livro " + i,"Descricao " + i, Arrays.asList(autor));
             livros.add(livro);
-        }
+        }*/
 
         //retirado no ex 1.4 pag 17
         //this.listaLivrosView = (RecyclerView) view.findViewById(R.id.list_livros_frag);
@@ -60,4 +62,9 @@ public class ListaLivrosFragment extends Fragment {
         return view;
     }
 
+    public void populaLista(List<Livro> livros) {
+        this.livros.clear();
+        this.livros.addAll(livros);
+        listaLivrosView.getAdapter().notifyDataSetChanged();
+    }
 }

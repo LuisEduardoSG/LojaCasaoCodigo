@@ -21,11 +21,10 @@ public class Livro implements Serializable{
     private String urlFoto;
     private List<Autor> autores;
 
-    public Livro (String nome, String descricao, List<Autor> autores )
+
+    public Livro ()
     {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.autores = autores;
+
     }
 
 
@@ -116,4 +115,5 @@ public class Livro implements Serializable{
     public void setAutores(List<Autor> autores) {
         this.autores = autores;
     }
+
 }

@@ -5,6 +5,7 @@ import com.example.android6928.lojacasadocodigo.Modelo.Livro;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.GET;
 
 /**
@@ -13,7 +14,7 @@ import retrofit2.http.GET;
 
 public interface LivrosService {
 
-    //
-    @GET("listaLivros")
-    Call<List<Livro>> ListarLivros();
-}
+    @GET("listarLivros?indicePrimeiroLivro=0&qtdLivros=20")
+    Call<List<Livro>> listarLivros();
+
+    }

@@ -11,7 +11,4 @@ import java.util.List;
 public interface LivrosDelegate {
     void lidaComLivroSelecionado(Livro livro);
 
-    void lidaComSucesso(List<Livro> body);
-
-    void lidaComErro(Throwable t);
 }

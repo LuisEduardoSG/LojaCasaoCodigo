@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.android6928.lojacasadocodigo.Interface.LivrosDelegate;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,6 +48,15 @@ public class ListaLivrosAdapter extends RecyclerView.Adapter {
 
         //pega o item da lista livros
         Livro livro = livros.get(position);
+
+        Picasso.with(holder.foto.getContext())
+                .load(livro.getUrlFoto())
+                .placeholder(R.drawable.livro) //podemos colocar uma foto padrão caso aja problema
+                .into(holder.foto);
+
+                                                //deve ser chamado à parte
+        //Picasso.with(holder.foto.getContext()).setIndicatorsEnabled(true); //mostra a fonte (com uma cor)
+                                                                            // de onde ele está carregando a foto, seja download,seja cache...
 
         //setando o título do livro
         holder.titulo.setText(livro.getNome());

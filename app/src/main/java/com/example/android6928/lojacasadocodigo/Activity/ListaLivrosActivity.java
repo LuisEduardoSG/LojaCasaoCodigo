@@ -8,8 +8,13 @@ import android.widget.Toast;
 import com.example.android6928.lojacasadocodigo.Fragment.DetalhesLivrosFragment;
 import com.example.android6928.lojacasadocodigo.Fragment.ListaLivrosFragment;
 import com.example.android6928.lojacasadocodigo.Interface.LivrosDelegate;
+import com.example.android6928.lojacasadocodigo.LivrosEvent;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
 import com.example.android6928.lojacasadocodigo.R;
+import com.example.android6928.lojacasadocodigo.WebClient;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -22,8 +27,15 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
         setContentView(R.layout.activity_lista_livros);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_livros, new ListaLivrosFragment() );
+
+        listaLivrosFragment = new ListaLivrosFragment();
+        transaction.replace(R.id.frame_livros, listaLivrosFragment);
         transaction.commit();
+
+        new WebClient().getLivros();
+
+
+        EventBus.getDefault().register(this);
 
 
         /*
@@ -40,6 +52,11 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
 
         // obrigatório, sempre deve ser chamado quando Recycler ser utilizado
         listaLivrosView.setLayoutManager(new LinearLayoutManager(this));*/
+    }
+
+    public void onDestroy(){
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     //pega o livro da lista e carrega o detalhes
@@ -60,15 +77,27 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
         transaction.commit();
     }
 
-    @Override
-    public void lidaComSucesso(List<Livro> livros) {
+    @Subscribe
+    public void lidaComSucesso(LivrosEvent evento/*List<Livro> livros*/) {
+        List<Livro> livros = evento.getLivros();
         listaLivrosFragment.populaLista(livros);
+        //listaLivrosFragment.populaLista(livros);
     }
 
-    @Override
+    @Subscribe
     public void lidaComErro(Throwable t) {
-        Toast.makeText(this, "Não foi possível carregar os Livros - Erro " + t,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Não foi possível carregar os Livros - Erro " + t,Toast.LENGTH_SHORT).show();
     }
 
+  /*
+    @Subscribe
+    public void recebeLivros(LivrosEvent evento){
+
+    }
+
+    @Subscribe
+    public void recebeErro(Throwable erro){
+        Toast.makeText(this, "Não deu pra carregar, mals ae.", Toast.LENGTH_SHORT).show();
+    }*/
 
 }

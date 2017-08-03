@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
 import com.example.android6928.lojacasadocodigo.R;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,11 +78,20 @@ public class DetalhesLivrosFragment extends Fragment {
             }
             listaDeAutores += autor.getNome();
         }
+
+        Picasso.with(getContext())
+                .load(livro.getUrlFoto())
+                .placeholder(R.drawable.livro)
+                .into(foto);
+
         autores.setText(listaDeAutores);
 
         descricao.setText(livro.getDescricao());
+
         numPag.setText(String.valueOf(livro.getNumPag()));
+
         isbn.setText(livro.getISBN());
+
         dataPublic.setText(livro.getDataPublicacao());
 
         String textoComprarFisico = String.format("Comprar Livro Físico - R$ %.2f",livro.getValorFisico());
