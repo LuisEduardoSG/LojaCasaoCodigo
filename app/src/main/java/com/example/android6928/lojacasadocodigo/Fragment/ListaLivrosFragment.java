@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android6928.lojacasadocodigo.EnlessListListener;
 import com.example.android6928.lojacasadocodigo.ListaLivrosAdapter;
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
 import com.example.android6928.lojacasadocodigo.R;
+import com.example.android6928.lojacasadocodigo.WebClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +32,7 @@ public class ListaLivrosFragment extends Fragment {
     @BindView(R.id.list_livros_frag)
     protected RecyclerView listaLivrosView;
 
-    private List<Livro> livros = new ArrayList<>();
+    private final List<Livro> livros = new ArrayList<>();
 
 
     @Override
@@ -38,7 +40,7 @@ public class ListaLivrosFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_lista_livros,parent,false);
 
-
+        //usado para associas variaveis com o xml
         ButterKnife.bind(this,view);
 
         //retirado ex 3.3 (acho)
@@ -63,8 +65,18 @@ public class ListaLivrosFragment extends Fragment {
     }
 
     public void populaLista(List<Livro> livros) {
-        this.livros.clear();
+
+        //this.livros.clear();
         this.livros.addAll(livros);
         listaLivrosView.getAdapter().notifyDataSetChanged();
+
+        listaLivrosView.addOnScrollListener(new EnlessListListener(){
+            @Override
+            protected void carregaMaisItens() {
+                new WebClient().getLivros(ListaLivrosFragment.this.livros.size(), 10);
+            }
+
+        });
+
     }
 }

@@ -1,8 +1,11 @@
 package com.example.android6928.lojacasadocodigo.Activity;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android6928.lojacasadocodigo.Fragment.DetalhesLivrosFragment;
@@ -32,7 +35,7 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
         transaction.replace(R.id.frame_livros, listaLivrosFragment);
         transaction.commit();
 
-        new WebClient().getLivros();
+        new WebClient().getLivros(0,10);
 
 
         EventBus.getDefault().register(this);
@@ -99,5 +102,20 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
     public void recebeErro(Throwable erro){
         Toast.makeText(this, "Não deu pra carregar, mals ae.", Toast.LENGTH_SHORT).show();
     }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_lista_livros_avtivity);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.vai_para_carrinho){
+            Intent vaiCarrinho = new Intent(this, CarrinhoActivity.class);
+            startActivity(vaiCarrinho);
+        }
+    }
+
 
 }
