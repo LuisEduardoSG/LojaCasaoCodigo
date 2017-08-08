@@ -105,7 +105,7 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_lista_livros_avtivity);
+        getMenuInflater().inflate(R.menu.menu_lista_livros_avtivity,menu);
         return true;
     }
 
@@ -115,6 +115,7 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
             Intent vaiCarrinho = new Intent(this, CarrinhoActivity.class);
             startActivity(vaiCarrinho);
         }
+        return true;
     }
 
 

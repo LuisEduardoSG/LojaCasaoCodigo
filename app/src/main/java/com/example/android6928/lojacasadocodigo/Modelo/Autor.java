@@ -1,9 +1,11 @@
 package com.example.android6928.lojacasadocodigo.Modelo;
 
+import java.io.Serializable;
+
 /**
  * Created by android6928 on 31/07/17.
  */
-public class Autor {
+public class Autor implements Serializable {
 
     private long id;
 

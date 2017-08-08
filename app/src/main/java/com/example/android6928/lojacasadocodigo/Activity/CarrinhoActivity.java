@@ -6,9 +6,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.example.android6928.lojacasadocodigo.Carrinho;
-import com.example.android6928.lojacasadocodigo.ItemAdapter;
+import com.example.android6928.lojacasadocodigo.CasaDoCodigoApplication;
+import com.example.android6928.lojacasadocodigo.Fragment.DetalhesLivrosFragment;
+import com.example.android6928.lojacasadocodigo.Interface.CasaDoCodigoComponent;
+import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
+import com.example.android6928.lojacasadocodigo.ItensAdapter;
+import com.example.android6928.lojacasadocodigo.Modelo.Item;
 import com.example.android6928.lojacasadocodigo.R;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +33,9 @@ public class CarrinhoActivity extends AppCompatActivity {
     @BindView(R.id.valor_carrinho)
     TextView valorTotal;
 
-    private Carrinho carrinho;
+
+    @Inject
+    Carrinho carrinho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +44,21 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        this.carrinho = new Carrinho();
 
-        this.listaItens.setAdapter(new ItensAdapter(carrinho.getItens()));
+        //assim o inject funciona
+        CasaDoCodigoComponent component = ((CasaDoCodigoApplication) getApplication()).getComponent();
+        component.inject(this);
+
+
+        //opicional
+   /*     this.carrinho = component.providesCarrinho();
+
+
+        List<Item>itens = carrinho.getItens();
+        this.listaItens.setAdapter(new ItensAdapter(itens, this));
         this.listaItens.setLayoutManager(new LinearLayoutManager(this));
+*/
+
 
     }
     
@@ -50,5 +71,14 @@ public class CarrinhoActivity extends AppCompatActivity {
     }
 
     private void carregaLista() {
+        this.listaItens.setAdapter(new ItensAdapter(carrinho.getItens(), this));
+        this.listaItens.setLayoutManager(new LinearLayoutManager(this));
+
+        double total = 0;
+
+        for (Item item : carrinho.getItens()){
+            total += item.getValor();
+        }
+        valorTotal.setText("R$ " + total);
     }
 }

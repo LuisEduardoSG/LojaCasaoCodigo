@@ -9,14 +9,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.android6928.lojacasadocodigo.CasaDoCodigoApplication;
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
+import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
+import com.example.android6928.lojacasadocodigo.Modelo.Item;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
+import com.example.android6928.lojacasadocodigo.Modelo.TipoDeCompra;
 import com.example.android6928.lojacasadocodigo.R;
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by android6928 on 01/08/17.
@@ -54,6 +62,12 @@ public class DetalhesLivrosFragment extends Fragment {
     @BindView(R.id.detalhes_livro_comprar_ambos)
     Button botaoComprarAmbos;
 
+    @Inject
+    Carrinho carrinho;
+
+
+    Livro livro;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,9 +76,15 @@ public class DetalhesLivrosFragment extends Fragment {
 
         if (getArguments() != null) {
             Bundle arguments = getArguments();
-            Livro livro = (Livro) arguments.getSerializable("livro");
+            this.livro = (Livro) arguments.getSerializable("livro");
             populaCamposCom(livro);
         }
+
+        CasaDoCodigoApplication app = (CasaDoCodigoApplication) getActivity().getApplication();
+        app.getComponent().inject(this);
+
+
+
         return view;
     }
 
@@ -104,6 +124,28 @@ public class DetalhesLivrosFragment extends Fragment {
         botaoComprarAmbos.setText(textoComprarAmbos);
 
 
+    }
+
+
+    @OnClick(R.id.detalhes_livro_comprar_fisico)
+    public void setBotaoComprarFisico(){
+        Toast.makeText(getActivity(),"Livro adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
+
+        carrinho.adciona(new Item(livro, TipoDeCompra.FISICO));
+    }
+
+    @OnClick(R.id.detalhes_livro_comprar_ebook)
+    public void setBotaoComprarEbook(){
+        Toast.makeText(getActivity(),"Livro adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
+
+        carrinho.adciona(new Item(livro, TipoDeCompra.VIRTUAL));
+    }
+
+    @OnClick(R.id.detalhes_livro_comprar_ambos)
+    public void setBotaoComprarAmbos(){
+        Toast.makeText(getActivity(),"Livros adicionados ao carrinho!", Toast.LENGTH_SHORT).show();
+
+        carrinho.adciona(new Item(livro, TipoDeCompra.JUNTOS));
     }
 
 }

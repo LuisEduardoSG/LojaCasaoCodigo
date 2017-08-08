@@ -1,4 +1,4 @@
-package com.example.android6928.lojacasadocodigo;
+package com.example.android6928.lojacasadocodigo.Modelo;
 
 import com.example.android6928.lojacasadocodigo.Modelo.Item;
 
