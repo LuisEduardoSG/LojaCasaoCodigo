@@ -9,4 +9,11 @@
         app:showAsAction="always"
         />
 
+    <item
+        android:id="@+id/log_off"
+        android:icon="@drawable/common_ic_googleplayservices"
+        android:title="logoff"
+        app:showAsAction="always"
+        />
+
 </menu>

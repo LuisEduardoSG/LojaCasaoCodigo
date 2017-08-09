@@ -46,11 +46,14 @@ public class CarrinhoActivity extends AppCompatActivity {
 
 
         //assim o inject funciona
-        CasaDoCodigoComponent component = ((CasaDoCodigoApplication) getApplication()).getComponent();
+        /*CasaDoCodigoComponent component = ((CasaDoCodigoApplication) getApplication()).getComponent();
         component.inject(this);
+*/
 
+        CasaDoCodigoApplication app = (CasaDoCodigoApplication) getApplication();
+        app.getComponent().inject(this);
 
-        //opicional
+        //opcional
    /*     this.carrinho = component.providesCarrinho();
 
 
@@ -58,7 +61,6 @@ public class CarrinhoActivity extends AppCompatActivity {
         this.listaItens.setAdapter(new ItensAdapter(itens, this));
         this.listaItens.setLayoutManager(new LinearLayoutManager(this));
 */
-
 
     }
     

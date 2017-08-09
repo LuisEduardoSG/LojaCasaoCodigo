@@ -1,6 +1,6 @@
 package com.example.android6928.lojacasadocodigo;
 
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.*;
 import android.view.ViewGroup;
 
 import com.example.android6928.lojacasadocodigo.Activity.CarrinhoActivity;
@@ -8,7 +8,7 @@ import com.example.android6928.lojacasadocodigo.Modelo.Item;
 
 import java.util.List;
 
-/**
+/*
  * Created by android6928 on 07/08/17.
  */
 public class ItensAdapter extends RecyclerView.Adapter {

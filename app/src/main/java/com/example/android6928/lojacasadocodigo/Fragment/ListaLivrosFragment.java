@@ -1,5 +1,6 @@
 package com.example.android6928.lojacasadocodigo.Fragment;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,19 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android6928.lojacasadocodigo.CasaDoCodigoApplication;
 import com.example.android6928.lojacasadocodigo.EnlessListListener;
+import com.example.android6928.lojacasadocodigo.Interface.CasaDoCodigoComponent;
 import com.example.android6928.lojacasadocodigo.ListaLivrosAdapter;
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
 import com.example.android6928.lojacasadocodigo.R;
 import com.example.android6928.lojacasadocodigo.WebClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.id.list;
 
 /**
  * Created by android6928 on 31/07/17.
@@ -34,6 +44,10 @@ public class ListaLivrosFragment extends Fragment {
 
     private final List<Livro> livros = new ArrayList<>();
 
+    @Inject
+    FirebaseRemoteConfig config;
+
+    boolean listaSimples;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, Bundle savedInstanceState){
@@ -42,6 +56,28 @@ public class ListaLivrosFragment extends Fragment {
 
         //usado para associas variaveis com o xml
         ButterKnife.bind(this,view);
+
+        CasaDoCodigoApplication app = ((CasaDoCodigoApplication) getActivity().getApplication();
+        CasaDoCodigoComponent component = app.getComponent(); //getAplication().getComponent();
+        component.inject(this);
+/*        remo1teConfig.fetch(30)
+                .addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (task.isSuccessful()){
+                            remoteConfig.activateFetch();
+                            listaSimples = remoteConfig.getBoolean("lista_simples");
+                        }else{
+                            listaSimples = false;
+                        }
+                    }
+                });
+        configuraLista(listaSimples);*/
+
+
+
+
+
 
         //retirado ex 3.3 (acho)
       /*  //popular a lista de livros

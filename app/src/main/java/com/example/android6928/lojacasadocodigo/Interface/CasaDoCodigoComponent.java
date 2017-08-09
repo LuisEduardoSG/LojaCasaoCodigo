@@ -4,6 +4,8 @@ package com.example.android6928.lojacasadocodigo.Interface;
 import com.example.android6928.lojacasadocodigo.Activity.CarrinhoActivity;
 import com.example.android6928.lojacasadocodigo.CasaDoCodigoModule;
 import com.example.android6928.lojacasadocodigo.Fragment.DetalhesLivrosFragment;
+import com.example.android6928.lojacasadocodigo.Fragment.ListaLivrosFragment;
+import com.example.android6928.lojacasadocodigo.ListaLivrosAdapter;
 import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
 
 import javax.inject.Singleton;
@@ -19,6 +21,7 @@ public interface CasaDoCodigoComponent {
 
     void inject (CarrinhoActivity activity);
     void inject (DetalhesLivrosFragment fragment);
-    Carrinho providesCarrinho();
+    void inject (ListaLivrosFragment fragment);
+//    Carrinho providesCarrinho();
 
 }

@@ -84,7 +84,6 @@ public class DetalhesLivrosFragment extends Fragment {
         app.getComponent().inject(this);
 
 
-
         return view;
     }
 

@@ -16,10 +16,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ListaLivrosActivity"></activity>
+        <activity android:name=".Activity.ListaLivrosActivity">
+
+        </activity>
         <activity android:name=".Activity.CarrinhoActivity" />
         <activity
-            android:name=".Activity.LoginLojaCDCActivity"
+            android:name=".Activity.LoginActivity"
             android:label="@string/title_activity_login_loja_cdc">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginLojaActivity"
-            android:label="@string/title_activity_login_loja"></activity>
+
     </application>
 
 </manifest>

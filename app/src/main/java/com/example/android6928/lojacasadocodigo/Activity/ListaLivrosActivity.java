@@ -15,6 +15,7 @@ import com.example.android6928.lojacasadocodigo.LivrosEvent;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
 import com.example.android6928.lojacasadocodigo.R;
 import com.example.android6928.lojacasadocodigo.WebClient;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -114,6 +115,13 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
         if (item.getItemId() == R.id.vai_para_carrinho){
             Intent vaiCarrinho = new Intent(this, CarrinhoActivity.class);
             startActivity(vaiCarrinho);
+        }
+        else if (item.getItemId() == R.id.log_off){
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            auth.signOut();
+            finish();
+//            Intent login = new Intent(this, LoginActivity.class);
+//            startActivity(login);
         }
         return true;
     }
