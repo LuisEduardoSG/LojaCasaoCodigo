@@ -42,9 +42,9 @@ public class ListaLivrosAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layout = R.layout.item_livro_impar;
-        if (layout % 2 == 0) {
-            layout = R.layout.item_livro_par;
+        int layout = R.layout.item_livro_par;
+        if (viewType % 2 == 0) {
+            layout = R.layout.item_livro_impar;
         }
         //instanciando a view,
         View view = LayoutInflater.from(parent.getContext()).inflate(layout,parent,false);

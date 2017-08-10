@@ -6,6 +6,8 @@ import com.example.android6928.lojacasadocodigo.Interface.CasaDoCodigoComponent;
 import com.example.android6928.lojacasadocodigo.Interface.DaggerCasaDoCodigoComponent;
 import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
 
+import javax.inject.Inject;
+
 /**
  * Created by android6928 on 07/08/17.
  */

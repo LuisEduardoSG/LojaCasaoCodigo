@@ -1,11 +1,14 @@
 package com.example.android6928.lojacasadocodigo.Activity;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.android6928.lojacasadocodigo.Fragment.DetalhesLivrosFragment;
@@ -13,16 +16,23 @@ import com.example.android6928.lojacasadocodigo.Fragment.ListaLivrosFragment;
 import com.example.android6928.lojacasadocodigo.Interface.LivrosDelegate;
 import com.example.android6928.lojacasadocodigo.LivrosEvent;
 import com.example.android6928.lojacasadocodigo.Modelo.Livro;
+import com.example.android6928.lojacasadocodigo.NotificacaoEvent;
 import com.example.android6928.lojacasadocodigo.R;
 import com.example.android6928.lojacasadocodigo.WebClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.RemoteMessage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class ListaLivrosActivity extends AppCompatActivity implements LivrosDelegate {
+
+    @BindView(R.id.frame_livros)
+    FrameLayout frameLayout;
 
     private ListaLivrosFragment listaLivrosFragment;
     @Override
@@ -37,8 +47,7 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
         transaction.commit();
 
         new WebClient().getLivros(0,10);
-
-
+                                        //instancia da classe
         EventBus.getDefault().register(this);
 
 
@@ -80,6 +89,23 @@ public class ListaLivrosActivity extends AppCompatActivity implements LivrosDele
 
         transaction.commit();
     }
+
+    @Subscribe
+    public void recebeNotification (NotificacaoEvent event){                       //vai ficar infinitamente lá
+        final Snackbar snkac = Snackbar.make(this.frameLayout,event.mensagem.getNotification().getBody(),Snackbar.LENGTH_INDEFINITE);
+        snkac.setAction("ok", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snkac.dismiss();
+            }
+        });
+        snkac.show();
+    }
+
+
+
+
+
 
     @Subscribe
     public void lidaComSucesso(LivrosEvent evento/*List<Livro> livros*/) {

@@ -3,7 +3,9 @@
     <entry>
         <key>lista_simples</key>
         <value>false</value>
-
     </entry>
-
+    <entry>
+        <key>cor_barra_superior</key>
+        <value>false</value>
+    </entry>
 </defaultsMap>

@@ -31,7 +31,8 @@ public class CasaDoCodigoModule {
         config.setConfigSettings(settings);
         return config;
     }
-
+@Singleton
+@Provides
     public FirebaseRemoteConfigSettings providesSettings(){
         FirebaseRemoteConfigSettings settings =
                 new FirebaseRemoteConfigSettings.Builder()

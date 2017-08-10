@@ -45,7 +45,7 @@ public class ListaLivrosFragment extends Fragment {
     private final List<Livro> livros = new ArrayList<>();
 
     @Inject
-    FirebaseRemoteConfig config;
+    FirebaseRemoteConfig remoteConfig;
 
     boolean listaSimples;
 
@@ -57,23 +57,22 @@ public class ListaLivrosFragment extends Fragment {
         //usado para associas variaveis com o xml
         ButterKnife.bind(this,view);
 
-        CasaDoCodigoApplication app = ((CasaDoCodigoApplication) getActivity().getApplication();
+        CasaDoCodigoApplication app = ((CasaDoCodigoApplication) getActivity().getApplication());
         CasaDoCodigoComponent component = app.getComponent(); //getAplication().getComponent();
         component.inject(this);
-/*        remo1teConfig.fetch(30)
+        remoteConfig.fetch(30)
                 .addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()){
-                            remoteConfig.activateFetch();
+                            remoteConfig.activateFetched();
                             listaSimples = remoteConfig.getBoolean("lista_simples");
                         }else{
                             listaSimples = false;
                         }
                     }
                 });
-        configuraLista(listaSimples);*/
-
+        configuraLista(listaSimples);
 
 
 
@@ -98,6 +97,14 @@ public class ListaLivrosFragment extends Fragment {
         listaLivrosView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
 
         return view;
+    }
+
+    private void configuraLista(boolean listaSimples) {
+
+        int layout = R.layout.item_livro_impar;
+        if (layout % 2 == 0 && !listaSimples) {
+            layout = R.layout.item_livro_par;
+        }
     }
 
     public void populaLista(List<Livro> livros) {
