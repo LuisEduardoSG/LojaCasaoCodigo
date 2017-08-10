@@ -4,6 +4,8 @@ package com.example.android6928.lojacasadocodigo;
 
 
 import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
@@ -31,8 +33,8 @@ public class CasaDoCodigoModule {
         config.setConfigSettings(settings);
         return config;
     }
-@Singleton
-@Provides
+    @Singleton
+    @Provides
     public FirebaseRemoteConfigSettings providesSettings(){
         FirebaseRemoteConfigSettings settings =
                 new FirebaseRemoteConfigSettings.Builder()
@@ -41,5 +43,28 @@ public class CasaDoCodigoModule {
         return settings;
     }
 
+    @Singleton
+    @Provides
+    public FirebaseDatabase providesDatabas(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //funciona offline
+        database.setPersistenceEnabled(true);
+        return database;
+    }
+
+
+    @Singleton
+    @Provides
+    public FirebaseAuth providesAuth(){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        //funciona offline
+        return auth;
+    }
+
+    @Singleton
+    @Provides
+    public CarrinhoDAO providesCarrinhoDAO(FirebaseDatabase db, FirebaseAuth auth){
+        return new CarrinhoDAO(db,auth);
+    }
 
 }
