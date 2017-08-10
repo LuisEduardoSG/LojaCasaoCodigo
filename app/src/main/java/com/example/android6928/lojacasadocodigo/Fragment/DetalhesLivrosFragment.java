@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android6928.lojacasadocodigo.CarrinhoDAO;
 import com.example.android6928.lojacasadocodigo.CasaDoCodigoApplication;
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
 import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
@@ -67,6 +68,9 @@ public class DetalhesLivrosFragment extends Fragment {
 
 
     Livro livro;
+
+    @Inject
+    CarrinhoDAO dao;
 
     @Nullable
     @Override
@@ -131,6 +135,8 @@ public class DetalhesLivrosFragment extends Fragment {
         Toast.makeText(getActivity(),"Livro adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
 
         carrinho.adciona(new Item(livro, TipoDeCompra.FISICO));
+
+
     }
 
     @OnClick(R.id.detalhes_livro_comprar_ebook)
