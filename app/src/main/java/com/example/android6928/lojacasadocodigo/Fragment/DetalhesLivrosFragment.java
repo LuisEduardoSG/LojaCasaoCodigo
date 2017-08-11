@@ -1,5 +1,6 @@
 package com.example.android6928.lojacasadocodigo.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android6928.lojacasadocodigo.Activity.CarrinhoActivity;
 import com.example.android6928.lojacasadocodigo.CarrinhoDAO;
 import com.example.android6928.lojacasadocodigo.CasaDoCodigoApplication;
 import com.example.android6928.lojacasadocodigo.Modelo.Autor;
@@ -132,25 +134,44 @@ public class DetalhesLivrosFragment extends Fragment {
 
     @OnClick(R.id.detalhes_livro_comprar_fisico)
     public void setBotaoComprarFisico(){
-        Toast.makeText(getActivity(),"Livro adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
+        comprarItem(TipoDeCompra.FISICO);
+        //Toast.makeText(getActivity(),"Livro adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
 
-        carrinho.adciona(new Item(livro, TipoDeCompra.FISICO));
+        //carrinho.adciona(new Item(livro, TipoDeCompra.FISICO));
 
 
     }
+
 
     @OnClick(R.id.detalhes_livro_comprar_ebook)
     public void setBotaoComprarEbook(){
+        comprarItem(TipoDeCompra.VIRTUAL);
+
+        /*
         Toast.makeText(getActivity(),"Livro adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
 
         carrinho.adciona(new Item(livro, TipoDeCompra.VIRTUAL));
-    }
+    */}
 
     @OnClick(R.id.detalhes_livro_comprar_ambos)
     public void setBotaoComprarAmbos(){
-        Toast.makeText(getActivity(),"Livros adicionados ao carrinho!", Toast.LENGTH_SHORT).show();
+        comprarItem(TipoDeCompra.JUNTOS);
 
-        carrinho.adciona(new Item(livro, TipoDeCompra.JUNTOS));
+        /*Toast.makeText(getActivity(),"Livros adicionados ao carrinho!", Toast.LENGTH_SHORT).show();
+
+        carrinho.adciona(new Item(livro, TipoDeCompra.JUNTOS));*/
     }
+
+
+    private void comprarItem(TipoDeCompra tipoCompra) {
+        carrinho.adciona(new Item(livro,tipoCompra));
+        dao.SalvarCarrinho(carrinho);
+        Intent vaiCarrinho = new Intent(getContext(), CarrinhoActivity.class);
+        startActivity(vaiCarrinho);
+        //irParaCarrinho();
+
+    }
+
+
 
 }

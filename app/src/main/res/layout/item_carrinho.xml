@@ -31,11 +31,27 @@
                 android:textColor="#123"
                 android:textStyle="bold" />
 
+
+            <Button
+                android:id="@+id/botao_remove"
+                android:layout_width="134dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:text="Remover"
+                android:textColor="#FFF"
+                android:textStyle="bold"
+                app:backgroundTint="@color/common_google_signin_btn_text_light"
+                app:elevation="10dp"
+
+                />
+
             <TextView
                 android:id="@+id/valor_pago_item_comprado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right" />
+
+
 
         </android.support.design.widget.CoordinatorLayout>
 

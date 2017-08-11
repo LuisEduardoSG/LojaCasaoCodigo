@@ -37,9 +37,6 @@ public class ListaLivrosAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int layout = R.layout.item_livro_par;

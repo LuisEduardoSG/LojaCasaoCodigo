@@ -8,24 +8,41 @@ import java.util.List;
 /**
  * Created by android6928 on 31/07/17.
  */
+
+//determinando a entidade com o GREENDOWN, e ele faz o get e set sozinho
+
+//DETERMINA A ENTIDADE
+//@Entity
 public class Livro implements Serializable{
+    //OBRIGATORIO
+    //@Id
     private long id;
+    //DEFINI COMO NOT NULL
+    //@NotNull
     private String nome;
+
     private String descricao;
+    //FORÇAR O NOME
+    //@Property("NUMERO_PAGINAS")
     private int numPag;
     private String dataPublicacao;
+    //definir como único
+    //@Unique
     private String ISBN;
     private double valorFisico;
     private double valorVirtual;
     private double valorDoisJuntos;
     private String urlFoto;
+    //para não persisitir
+    //@Transient
     private List<Autor> autores;
+    //persistencia do metodo
+    //@Keep
 
-
-    public Livro ()
+    /*public void setNome()
     {
 
-    }
+    }*/
 
 
     public String getDataPublicacao() {

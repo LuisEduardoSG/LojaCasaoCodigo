@@ -3,6 +3,8 @@ package com.example.android6928.lojacasadocodigo;
 
 
 
+import android.content.Context;
+
 import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,6 +22,9 @@ import dagger.Provides;
  */
 @Module
 public class CasaDoCodigoModule {
+
+    private Context context;
+
     @Singleton //
     @Provides
     public Carrinho getCarrinho(){
@@ -66,5 +71,12 @@ public class CasaDoCodigoModule {
     public CarrinhoDAO providesCarrinhoDAO(FirebaseDatabase db, FirebaseAuth auth){
         return new CarrinhoDAO(db,auth);
     }
+    @Singleton
+    @Provides
+    public DaoSession providesDaoSession(Context ctx){
+        DaoMaster.NewOpenHelper helper = new DaoMaster.DevOpenHelper(ctx,"CasadoCodigo");
+
+    }
+
 
 }

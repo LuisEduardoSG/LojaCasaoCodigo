@@ -6,13 +6,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.example.android6928.lojacasadocodigo.CarrinhoDAO;
 import com.example.android6928.lojacasadocodigo.CasaDoCodigoApplication;
 import com.example.android6928.lojacasadocodigo.Fragment.DetalhesLivrosFragment;
+import com.example.android6928.lojacasadocodigo.Interface.CarrinhoDelegate;
 import com.example.android6928.lojacasadocodigo.Interface.CasaDoCodigoComponent;
 import com.example.android6928.lojacasadocodigo.Modelo.Carrinho;
 import com.example.android6928.lojacasadocodigo.ItensAdapter;
 import com.example.android6928.lojacasadocodigo.Modelo.Item;
 import com.example.android6928.lojacasadocodigo.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -25,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by android6928 on 03/08/17.
  */
 
-public class CarrinhoActivity extends AppCompatActivity {
+public class CarrinhoActivity extends AppCompatActivity  implements CarrinhoDelegate{
 
     @BindView(R.id.list_itens)
     RecyclerView listaItens;
@@ -33,9 +38,13 @@ public class CarrinhoActivity extends AppCompatActivity {
     @BindView(R.id.valor_carrinho)
     TextView valorTotal;
 
-
     @Inject
     Carrinho carrinho;
+
+    CarrinhoDelegate delegate;
+
+    @Inject
+    CarrinhoDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +53,8 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
+        EventBus.getDefault().register(this);
+        //dao.registraAtualizacoes();
         //assim o inject funciona
         /*CasaDoCodigoComponent component = ((CasaDoCodigoApplication) getApplication()).getComponent();
         component.inject(this);
@@ -64,7 +74,11 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     }
     
-    
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
     
     @Override
     protected void onResume(){
@@ -73,7 +87,7 @@ public class CarrinhoActivity extends AppCompatActivity {
     }
 
     private void carregaLista() {
-        this.listaItens.setAdapter(new ItensAdapter(carrinho.getItens(), this));
+        this.listaItens.setAdapter(new ItensAdapter(carrinho.getItens(), this, delegate));
         this.listaItens.setLayoutManager(new LinearLayoutManager(this));
 
         double total = 0;
@@ -83,4 +97,19 @@ public class CarrinhoActivity extends AppCompatActivity {
         }
         valorTotal.setText("R$ " + total);
     }
+
+    @Override
+    public void removeItem(Item item) {
+        carrinho.remove(item);
+        dao.SalvarCarrinho(carrinho);
+        carregaLista();
+    }
+
+    @Subscribe
+    public void recebeCarrinho(CarrinhoEvent evento){
+        carrinho.limpa();
+        carrinho.adcionaMuitos(evento.carrinho.getItens());
+    }
+
+
 }
